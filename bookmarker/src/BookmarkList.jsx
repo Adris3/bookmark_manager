@@ -1,6 +1,22 @@
 import React from "react"
 
 const BookmarkList = ({bookmarks, updateBookmark}) => { 
+    const onDelete = async (id) => {
+        try {
+            const options = {
+                method: "DELETE"
+            }
+            const response = await fetch(`http://127.0.0.1:5000/delete_bookmark/${id}`, options)
+            if (response.status === 2) {
+                updateCallback()
+            } else {
+                console.error("Failed to delete")
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
+
     return <div>
         <h2>Bookmarks</h2>
         <table>
@@ -18,7 +34,7 @@ const BookmarkList = ({bookmarks, updateBookmark}) => {
                         <td>{bookmark.link}</td>
                         <td>
                             <button onClick={() => updateBookmark(bookmark)}>Update</button>
-                            <button>Delete</button>
+                            <button onClick={() => onDelete(bookmark.id)}>Delete</button>
                         </td>
                     </tr>
                 ))}
