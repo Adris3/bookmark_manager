@@ -42,13 +42,13 @@ function App() {
 
   return (
     <>
-      <BookmarkList bookmarks={bookmarks} updateBookmark={openEditModal} updateCallBack={onUpdate}/>
+      <BookmarkList bookmarks={bookmarks} updateBookmark={openEditModal} />
       <button onClick={openCreateModal}>Create new bookmark</button>
       {
         isModalOpen && <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeModal}>&times;</span>
-            <BookmarkForm existingBookmark={currentBookmark} updateCallBack={onUpdate}/>
+            <BookmarkForm existingBookmark={currentBookmark} updateCallback={onUpdate}/>
           </div>
         </div>
 

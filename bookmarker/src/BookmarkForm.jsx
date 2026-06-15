@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const BookmarkForm = ({ existingBookmark = {}, updateCallback }) => {
 
     const [name, setName] = useState(existingBookmark.name || "");
     const [link, setLink] = useState(existingBookmark.link || "");
+
+    useEffect(() => {
+        setName(existingBookmark.name || "");
+        setLink(existingBookmark.link || "");
+    }, [existingBookmark]);
 
     const updating = Object.entries(existingBookmark).length !== 0;
 
@@ -17,7 +22,7 @@ const BookmarkForm = ({ existingBookmark = {}, updateCallback }) => {
         }
         const url = "http://127.0.0.1:5000/" + (updating ? `update_bookmark/${existingBookmark.id}` : "create_bookmark")
         const options = {
-            method: "POST",
+            method: updating ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -56,7 +61,7 @@ const BookmarkForm = ({ existingBookmark = {}, updateCallback }) => {
                     onChange={(e) => setLink(e.target.value)}
                 />
             </div>
-            <button type="submit">Create Bookmark</button>
+            <button type="submit">{updating ? "Update Bookmark" : "Create Bookmark"}</button>
         </form>
     );
 };

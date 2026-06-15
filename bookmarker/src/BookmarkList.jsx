@@ -1,6 +1,6 @@
 import React from "react"
 
-const BookmarkList = ({bookmarks}) => { 
+const BookmarkList = ({bookmarks, updateBookmark}) => { 
     return <div>
         <h2>Bookmarks</h2>
         <table>
