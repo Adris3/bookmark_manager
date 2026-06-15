@@ -1,3 +1,21 @@
-input, button, label {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #eef2ff;
+}
+
+input,
+button,
+label {
   margin-top: 10px;
 }
