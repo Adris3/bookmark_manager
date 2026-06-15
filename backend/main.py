@@ -7,7 +7,7 @@ from models import Bookmark
 # Since we only need to view the bookmarks at /bookmarks, GET is the only valid method here
 def get_bookmarks():
     bookmarks = Bookmark.query.all() # Uses Flask SQLAlchemy (ORM) to get all of the bookmarks in the database and return them
-    json_bookmarks = list(map(lambda x: x.to_json, bookmarks)) # Converts each bookmark object to json
+    json_bookmarks = list(map(lambda x: x.to_json(), bookmarks)) # Converts each bookmark object to json
     return jsonify({"bookmarks": json_bookmarks})
 
 @app.route("/create_bookmark", methods=["POST"])
