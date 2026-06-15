@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import BookmarkList from './BookmarkList'
 import './App.css'
+import BookmarkForm from './BookmarkForm'
 
 function App() {
 
@@ -17,7 +18,12 @@ function App() {
     console.log(data.contacts)
   }
 
-  return <BookmarkList bookmarks={bookmarks}/>
+  return (
+    <>
+      <BookmarkList bookmarks={bookmarks}/>
+      <BookmarkForm/>
+    </>
+    )
 }
 
 export default App
