@@ -31,6 +31,22 @@ def create_bookmark():
     
     return (jsonify({"message": "Bookmark created!"}), 201)
 
+@app.route("/update_bookmark/<int:bookmark_id>", methods=["PATCH"])
+def update_bookmark(bookmark_id):
+    bookmark = Bookmark.query.get(bookmark_id)
+
+    if not bookmark:
+        return (jsonify({"message": "Bookmark does not exist"}), 404)
+    
+    data = request.json
+    bookmark.name = data.get("name", bookmark.name)
+    bookmark.link = data.get("link", bookmark.link)
+    # If a new name or link doesn't exist, keep the old name or link
+
+    db.session.commit()
+
+    return (jsonify({"message": "Bookmark updated"}), 200)
+
 if __name__ == "__main__":
     # Creates all the defined models into the database upon start
     with app.app_context():
