@@ -31,10 +31,11 @@ function App() {
   return (
     <>
       <BookmarkList bookmarks={bookmarks}/>
+      <button onClick={openCreateModal}>Create new bookmark</button>
       {
         isModalOpen && <div className="modal">
-          <div className="modal-content">\
-            <span className="close" onClick={closeModal}>&times:</span>
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
             <BookmarkForm onSuccess={fetchBookmarks} />
           </div>
         </div>
