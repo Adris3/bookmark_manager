@@ -1,6 +1,6 @@
 import React from "react"
 
-const BookmarkList = ({bookmarks}) => {
+const BookmarkList = ({bookmarks}) => { 
     return <div>
         <h2>Bookmarks</h2>
         <table>
@@ -12,7 +12,7 @@ const BookmarkList = ({bookmarks}) => {
                 </tr>
             </thead>
             <tbody>
-                {bookmarks.map((boomark) => (
+                {bookmarks.map((bookmark) => (
                     <tr key={bookmark.id}>
                         <td>{bookmark.name}</td>
                         <td>{bookmark.link}</td>
