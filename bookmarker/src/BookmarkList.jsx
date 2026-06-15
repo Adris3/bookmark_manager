@@ -1,6 +1,11 @@
 import React from "react"
 
-const BookmarkList = ({bookmarks, updateBookmark, updateCallback}) => { 
+const BookmarkList = ({bookmarks, updateBookmark, updateCallback}) => {
+    const normalizeUrl = (url) => {
+        if (!url) return "#"
+        return url.startsWith("http://") || url.startsWith("https://") ? url : `https://${url}`
+    }
+
     const onDelete = async (id) => {
         try {
             const options = {
@@ -31,7 +36,11 @@ const BookmarkList = ({bookmarks, updateBookmark, updateCallback}) => {
                 {bookmarks.map((bookmark) => (
                     <tr key={bookmark.id}>
                         <td>{bookmark.name}</td>
-                        <td>{bookmark.link}</td>
+                        <td>
+                            <a href={normalizeUrl(bookmark.link)} target="_blank" rel="noreferrer" className="bookmark-link">
+                                {bookmark.link}
+                            </a>
+                        </td>
                         <td>
                             <button onClick={() => updateBookmark(bookmark)}>Update</button>
                             <button onClick={() => onDelete(bookmark.id)}>Delete</button>
