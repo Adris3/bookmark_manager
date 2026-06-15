@@ -12,16 +12,16 @@ function App() {
   }, [])
 
   const fetchBookmarks = async () => {
-    const response = await fetch("http://127.0.0.1:5000/contacts")
+    const response = await fetch("http://127.0.0.1:5000/bookmarks")
     const data = await response.json()
-    setBookmarks(data.contacts)
-    console.log(data.contacts)
+    setBookmarks(data.bookmarks)
+    console.log(data.bookmarks)
   }
 
   return (
     <>
       <BookmarkList bookmarks={bookmarks}/>
-      <BookmarkForm/>
+      <BookmarkForm onSuccess={fetchBookmarks} />
     </>
     )
 }

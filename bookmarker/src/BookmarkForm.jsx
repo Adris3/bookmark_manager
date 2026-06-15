@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BookmarkForm = () => {
+const BookmarkForm = ({ onSuccess }) => {
 
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
@@ -9,10 +9,10 @@ const BookmarkForm = () => {
         e.preventDefault()
 
         const data = {
-            name, 
+            name,
             link
         }
-        const url = "http://127.0.0.1/create/contact"
+        const url = "http://127.0.0.1:5000/create_bookmark"
         const options = {
             method: "POST",
             headers: {
@@ -25,7 +25,9 @@ const BookmarkForm = () => {
             const data = await response.json()
             alert(data.message)
         } else {
-            //success
+            setName("")
+            setLink("")
+            onSuccess?.()
         }
     }
 
