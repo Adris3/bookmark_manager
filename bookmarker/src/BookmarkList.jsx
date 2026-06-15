@@ -1,14 +1,14 @@
 import React from "react"
 
-const BookmarkList = ({bookmarks, updateBookmark}) => { 
+const BookmarkList = ({bookmarks, updateBookmark, updateCallback}) => { 
     const onDelete = async (id) => {
         try {
             const options = {
                 method: "DELETE"
             }
             const response = await fetch(`http://127.0.0.1:5000/delete_bookmark/${id}`, options)
-            if (response.status === 2) {
-                updateCallback()
+            if (response.ok) {
+                updateCallback?.()
             } else {
                 console.error("Failed to delete")
             }
