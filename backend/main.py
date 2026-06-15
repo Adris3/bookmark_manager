@@ -47,6 +47,18 @@ def update_bookmark(bookmark_id):
 
     return (jsonify({"message": "Bookmark updated"}), 200)
 
+@app.route("/delete_bookmark/<int:bookmark_id>", methods=["DELETE"])
+def delete_bookmark(bookmark_id):
+    bookmark = Bookmark.query.get(bookmark_id)
+
+    if not bookmark:
+        return (jsonify({"message": "Bookmark does not exist"}), 404)
+    
+    db.session.delete(bookmark)
+    db.session.commit()
+
+    return (jsonify({"message": "Bookmark is deleted"}), 200)
+
 if __name__ == "__main__":
     # Creates all the defined models into the database upon start
     with app.app_context():
