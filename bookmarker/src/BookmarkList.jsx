@@ -26,3 +26,5 @@ const BookmarkList = ({bookmarks}) => {
         </table>
     </div>
 }
+
+export default BookmarkList
