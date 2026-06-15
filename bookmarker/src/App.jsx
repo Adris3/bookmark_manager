@@ -7,7 +7,7 @@ function App() {
 
   const [bookmarks, setBookmarks] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const [currentBookmark, setCurrentBookmark] = useState({})
 
   useEffect(() => {
     fetchBookmarks()
@@ -22,21 +22,33 @@ function App() {
 
   const closeModal = () => {
     setIsModalOpen(false)
+    setCurrentBookmark({})
   }
 
   const openCreateModal = () => {
     if (!isModalOpen) setIsModalOpen(true)
   }
 
+  const openEditModal = (bookmark) => {
+    if (isModalOpen) return 
+    setCurrentBookmark(bookmark)
+    setIsModalOpen(true)
+  }
+
+  const onUpdate = () => {
+    closeModal()
+    fetchBookmarks()
+  }
+
   return (
     <>
-      <BookmarkList bookmarks={bookmarks}/>
+      <BookmarkList bookmarks={bookmarks} updateBookmark={openEditModal} updateCallBack={onUpdate}/>
       <button onClick={openCreateModal}>Create new bookmark</button>
       {
         isModalOpen && <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeModal}>&times;</span>
-            <BookmarkForm onSuccess={fetchBookmarks} />
+            <BookmarkForm existingBookmark={currentBookmark} updateCallBack={onUpdate}/>
           </div>
         </div>
 

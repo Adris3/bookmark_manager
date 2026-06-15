@@ -17,7 +17,7 @@ const BookmarkList = ({bookmarks}) => {
                         <td>{bookmark.name}</td>
                         <td>{bookmark.link}</td>
                         <td>
-                            <button>Update</button>
+                            <button onClick={() => updateBookmark(bookmark)}>Update</button>
                             <button>Delete</button>
                         </td>
                     </tr>

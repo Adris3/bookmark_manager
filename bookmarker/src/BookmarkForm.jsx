@@ -1,9 +1,12 @@
 import { useState } from "react";
 
-const BookmarkForm = ({ onSuccess }) => {
+const BookmarkForm = ({ existingBookmark = {}, updateCallback }) => {
 
-    const [name, setName] = useState("");
-    const [link, setLink] = useState("");
+    const [name, setName] = useState(existingBookmark.name || "");
+    const [link, setLink] = useState(existingBookmark.link || "");
+
+    const updating = Object.entries(existingBookmark).length !== 0;
+
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -12,7 +15,7 @@ const BookmarkForm = ({ onSuccess }) => {
             name,
             link
         }
-        const url = "http://127.0.0.1:5000/create_bookmark"
+        const url = "http://127.0.0.1:5000/" + (updating ? `update_bookmark/${existingBookmark.id}` : "create_bookmark")
         const options = {
             method: "POST",
             headers: {
@@ -25,9 +28,11 @@ const BookmarkForm = ({ onSuccess }) => {
             const data = await response.json()
             alert(data.message)
         } else {
-            setName("")
-            setLink("")
-            onSuccess?.()
+            // setName("")
+            // setLink("")
+            updateCallback()
+            
+            // onSuccess?.()
         }
     }
 
