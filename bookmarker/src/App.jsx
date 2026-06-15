@@ -17,11 +17,7 @@ function App() {
     console.log(data.contacts)
   }
 
-  return (
-    <>
-
-    </>
-  )
+  return <BookmarkList bookmarks={bookmarks}/>
 }
 
 export default App
